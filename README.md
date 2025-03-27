@@ -50,10 +50,13 @@
 ## Задание 2
 ### С помощью скрипта на языке Python заполните google-таблицу данными, описывающими выбранную игровую переменную в игре “СПАСТИ РТФ:Выживание”. Средствами google-sheets визуализируйте данные в google-таблице (постройте график / диаграмму и пр.) для наглядного представления выбранной игровой величины. Опишите характер изменения этой величины, опишите недостатки в реализации этой величины (например, в игре может произойти условие наступления эксплойта) и предложите до 3-х вариантов модификации условий работы с переменной, чтобы сделать игровой опыт лучше
 
-Ссылка на GoogleSheet: [https://docs.google.com/spreadsheets/d/10Mj86hQt35x9YtkF8c-Su1DDxIGTMjjj5Vg1xl4MWxM/edit?gid=0#gid=0]
+ С помощью Python и Jupyter lab, я сделал таблицу, в которой показывается количество HP и его составляющие.
+ ![image](https://github.com/user-attachments/assets/feb0a87d-9ae7-4089-bbd8-c2f3be5fa521)
+![image](https://github.com/user-attachments/assets/eb898b6f-adf6-4ad1-bc6a-b69d617f9e04)
 
 ```py
-import gspread
+function firstfunc() {
+  import gspread
 import numpy as np
 gc = gspread.service_account('unitydatasciense-445509-fac94f705ae6.json')
 sh = gc.open("WorkSheet2")
@@ -68,19 +71,20 @@ while index <= len(time_points):
     current_health = initial_health[index - 1] - damage_per_turn[index - 1]
     status = "Живой" if current_health > 0 else "Мертвый"
     
-    # Форматирование здоровья для отображения
+    
     current_health = str(current_health).replace('.', ',')
 
-    # Обновление в таблице
-    sh.sheet1.update(range_name=f'A{index}', values=[[index]])  # Индекс
+   
+    sh.sheet1.update(range_name=f'A{index}', values=[[index]])  
     sh.sheet1.update(range_name=f'B{index}', values=[[int(initial_health[index - 1])]])  # Начальное здоровье
     sh.sheet1.update(range_name=f'C{index}', values=[[int(current_health)]])  # Текущее здоровье
     sh.sheet1.update(range_name=f'D{index}', values=[[int(damage_per_turn[index - 1])]])  # Урон
-    sh.sheet1.update(range_name=f'E{index}', values=[[status]])  # Статус
+    sh.sheet1.update(range_name=f'E{index}', values=[[status]])  
 
     print(current_health, status)
 
     index += 1
+}
 ```
 ## Задание 3
 ### Настройте на сцене Unity воспроизведение звуковых файлов, описывающих динамику изменения выбранной переменной. Например, если выбрано здоровье главного персонажа вы можете выводить сообщения, связанные с его состоянием.
